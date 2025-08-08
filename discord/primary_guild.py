@@ -48,7 +48,7 @@ class PrimaryGuild:
     tag: Optional[:class:`str`]
         The primary guild's tag.
     identity_enabled: Optional[:class:`bool`]
-        Whether the user has their primary guild publicly displayed. If ``None``, the user has a public guild but has not reaffirmed the guild identity after a change
+        Whether the user has their primary guild publicly displayed. If ``None``, the user has a public guild but has not reaffirmed the guild identity after a change.
 
         .. warning::
 
@@ -69,7 +69,7 @@ class PrimaryGuild:
 
     @property
     def badge(self) -> Optional[Asset]:
-        """Optional[:class:`Asset`]: Returns the primary guild's asset"""
+        """Optional[:class:`Asset`]: Returns the primary guild's asset."""
         if self._badge is not None and self.id is not None:
             return Asset._from_primary_guild(self._state, self.id, self._badge)
         return None
