@@ -88,6 +88,7 @@ __all__ = (
     'CollectibleType',
     'NameplatePalette',
     'BaseTheme',
+    'InviteUsersJobStatus',
 )
 
 
@@ -1013,6 +1014,13 @@ class BaseTheme(Enum):
     dark = 2
     darker = 3
     midnight = 4
+
+
+class InviteUsersJobStatus(Enum):
+    unspecified = 0
+    pending = 1
+    completed = 2
+    failed = 3
 
 
 def create_unknown_value(cls: Type[E], val: Any) -> E:
