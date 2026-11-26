@@ -1,0 +1,75 @@
+name: experimental
+
+# Rebuilds the experimental branch: upstream discord.py master plus the pull requests in
+# .experimental/prs.json. It only pushes when discord.py's tests and .experimental/tests pass,
+# and opens an issue when something needs a person (a PR merged, closed, updated, or conflicting).
+#
+# Scheduled runs only happen on the repository's default branch, so make `experimental` the
+# default branch in the repository settings.
+
+on:
+  schedule:
+    - cron: '17 6 * * *'  # daily
+  workflow_dispatch:
+  push:
+    branches: [experimental]
+    paths:
+      - '.experimental/**'
+      - '.github/workflows/experimental.yml'
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: experimental-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    # don't run in forks of this fork
+    if: github.repository == 'Ken-Miles/discord.py'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: experimental
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install discord.py's test dependencies, pyright and ruff
+        # pinned to the versions discord.py's lint workflow uses
+        run: python -m pip install -e '.[test]' pyright==1.1.394 ruff==0.12
+
+      - name: Rebuild, test and push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          python .experimental/build.py --push --report "$RUNNER_TEMP/report.md"
+
+      - name: Add the report to the run summary
+        if: always()
+        run: cat "$RUNNER_TEMP/report.md" >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Open or update an issue when something needs attention
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ ! -f "$RUNNER_TEMP/report.md.attention" ]; then
+            echo "nothing needs attention"
+            exit 0
+          fi
+          title='experimental branch needs attention'
+          body_file="$RUNNER_TEMP/report.md"
+          number=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$title\" in:title" --json number --jq '.[0].number')
+          if [ -n "$number" ]; then
+            gh issue comment "$number" --repo "$GITHUB_REPOSITORY" --body-file "$body_file"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body-file "$body_file"
+          fi

@@ -1,0 +1,73 @@
+{
+  "built_at": "2026-11-26T01:16:18+00:00",
+  "upstream": "65232c38702be5844cf2ce865a4777eb1928b5d0",
+  "included": [
+    {
+      "number": 10513,
+      "sha": "755a728ab6cf4f4833ba3c7293055e4cd23b2dac",
+      "title": "Identify properties on DiscordWebSocket"
+    },
+    {
+      "number": 10495,
+      "sha": "2986b2f2bc9561c218530ec663f64b21cc863f56",
+      "title": "VR client status"
+    },
+    {
+      "number": 10545,
+      "sha": "1eaef3abcca48ad07f1d97422be7784e57267650",
+      "title": "Fetch member and role permissions"
+    },
+    {
+      "number": 10546,
+      "sha": "f61c4046699f8c6201ce5617596b6836eb0916f5",
+      "title": "New AttachmentFlags"
+    },
+    {
+      "number": 10517,
+      "sha": "0a4ad0e2263938d01e66c7aa6afd49bb7196bf09",
+      "title": "Cap probed bitrate at 512 kbps"
+    },
+    {
+      "number": 10230,
+      "sha": "cc7262913e85a82ce82ed137cc3859dbdedca25c",
+      "title": "Send voice messages"
+    },
+    {
+      "number": 10493,
+      "sha": "fed8ca37f6088c335518ba0e49c1995b7b2e1168",
+      "title": "Per-server avatar decorations"
+    },
+    {
+      "number": 10442,
+      "sha": "16f821bb7f78de312fcee406724602cdcc263420",
+      "title": "last_pin_timestamp on channels"
+    },
+    {
+      "number": 10428,
+      "sha": "e5991a84b9268a7f2f84f9886d7987c4899ebc1d",
+      "title": "Shared client themes"
+    },
+    {
+      "number": 10514,
+      "sha": "94a55510077daf9a885ae7f1342d85c8b9f061de",
+      "title": "Spoiler channels"
+    },
+    {
+      "number": 10386,
+      "sha": "900fa4277c0b5b687bbaa403370c0ceab1974834",
+      "title": "Community invites"
+    },
+    {
+      "number": 10547,
+      "sha": "daa31f14ee1f0071f5dd579e1735adf856df1334",
+      "title": "Channel and role reorder audit log actions"
+    }
+  ],
+  "skipped": [],
+  "patches": [
+    "patches/10547-target-and-count.patch",
+    "patches/10514-create-options.patch",
+    "patches/10517-unknown-bitrate.patch",
+    "patches/ci-drop-python-3.8.patch"
+  ]
+}

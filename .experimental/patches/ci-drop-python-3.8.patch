@@ -1,0 +1,39 @@
+diff --git a/.github/workflows/build.yml b/.github/workflows/build.yml
+index d82ae9a9..e8fbba88 100644
+--- a/.github/workflows/build.yml
++++ b/.github/workflows/build.yml
+@@ -11,7 +11,7 @@ jobs:
+     strategy:
+       fail-fast: false
+       matrix:
+-        python-version: [ '3.8', '3.x' ]
++        python-version: [ '3.x' ]  # 3.8 dropped: GitHub's runners no longer have it
+         language: [ 'en', 'ja' ]
+ 
+     name: dists & docs (${{ matrix.python-version }}/${{ matrix.language }})
+diff --git a/.github/workflows/lint.yml b/.github/workflows/lint.yml
+index 2c9f648a..28477ad5 100644
+--- a/.github/workflows/lint.yml
++++ b/.github/workflows/lint.yml
+@@ -11,7 +11,7 @@ jobs:
+     strategy:
+       fail-fast: false
+       matrix:
+-        python-version: [ '3.8', '3.x' ]
++        python-version: [ '3.x' ]  # 3.8 dropped: GitHub's runners no longer have it
+ 
+     name: check ${{ matrix.python-version }}
+     steps:
+diff --git a/.github/workflows/test.yml b/.github/workflows/test.yml
+index f81a384a..ba72ea44 100644
+--- a/.github/workflows/test.yml
++++ b/.github/workflows/test.yml
+@@ -11,7 +11,7 @@ jobs:
+     strategy:
+       fail-fast: false
+       matrix:
+-        python-version: [ '3.8', '3.x' ]
++        python-version: [ '3.x' ]  # 3.8 dropped: GitHub's runners no longer have it
+ 
+     name: pytest ${{ matrix.python-version }}
+     steps:

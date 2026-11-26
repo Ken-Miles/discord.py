@@ -1,0 +1,6 @@
+report.md
+report.md.attention
+__pycache__/
+.pytest_cache/
+# discord.py ignores *.json at the root; these are part of the tooling
+!*.json

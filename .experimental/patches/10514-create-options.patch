@@ -1,0 +1,20 @@
+diff --git a/discord/channel.py b/discord/channel.py
+index e40e89f6..d06df23a 100755
+--- a/discord/channel.py
++++ b/discord/channel.py
+@@ -129,7 +129,6 @@ if TYPE_CHECKING:
+         topic: str
+         slowmode_delay: int
+         nsfw: bool
+-        spoiler: bool
+         overwrites: Mapping[Union[Role, Member, Object], PermissionOverwrite]
+         default_auto_archive_duration: int
+         default_thread_slowmode_delay: int
+@@ -139,7 +138,6 @@ if TYPE_CHECKING:
+         user_limit: int
+         rtc_region: Optional[str]
+         video_quality_mode: VideoQualityMode
+-        spoiler: bool
+         overwrites: Mapping[Union[Role, Member, Object], PermissionOverwrite]
+ 
+     class _CreateStageChannelOptions(_CreateVoiceChannelOptions, total=False):
