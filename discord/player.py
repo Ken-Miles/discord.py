@@ -675,7 +675,8 @@ class FFmpegOpusAudio(FFmpegAudio):
 
             codec = streamdata.get('codec_name')
             bitrate = int(streamdata.get('bit_rate', 0))
-            bitrate = min(round(bitrate / 1000), 512)
+            # streams that report no bitrate come out as 0: use the default instead of encoding at 0 kbps
+            bitrate = min(round(bitrate / 1000), 512) or None
 
         return codec, bitrate
 
